@@ -1,0 +1,14 @@
+{
+  "stun": {
+    "local_host": "0.0.0.0",
+    "local_port": 54320,
+    "servers": [
+      "stun.l.google.com:19302",
+      "stun.ekiga.net",
+      "stunserver.org",
+      "stun.ideasip.com",
+      "stun.softjoys.com",
+      "stun.voipbuster.com"
+    ]
+  }
+}
