@@ -21,12 +21,12 @@ class STUNConfig():
 
     def __init__(self):
         ''' init '''
-        self.local_host = None
-        self.local_port = None
+        self.local_host = ""
+        self.local_port = 0
         self.servers = None
 
     def from_dict(self, dic: dict):
         ''' from dict '''
-        self.local_host = dic.get("local_host", "0.0.0.0")
-        self.local_port = dic.get("local_port", 54320)
+        self.local_host = str(dic.get("local_host", "0.0.0.0"))
+        self.local_port = int(dic.get("local_port", 54320))
         self.servers = dic.get("servers", [])

@@ -11,6 +11,7 @@ class P2P():
         self.config = config.NetworkConfig()
         self.config.from_json(conf)
         self.stun_instance = None
+        self.nat_type = stun.NatType.BLOCKED
 
     def search_stun(self):
         ''' search stun '''
@@ -19,14 +20,15 @@ class P2P():
             host = server_split[0]
             port = 3478
             if len(server_split) > 1:
-                port = server_split[1]
-            stun_tmp = stun.STUN(self.config.stun.local_host,
+                port = int(server_split[1])
+            stun_tmp = stun.Stun(self.config.stun.local_host,
                                  self.config.stun.local_port, host, port)
-            nat_type = stun_tmp.check_nat()
-            if nat_type is None:
+            self.nat_type = stun_tmp.check_nat()
+            if self.nat_type == stun.NatType.BLOCKED:
                 continue
             self.stun_instance = stun_tmp
-            print("nat type:", nat_type)
+            print("nat type:", self.nat_type)
+            break
 
     def collect_info(self):
         ''' collect info '''
